@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-1
+  namespace: argocd
+spec:
+  project: project-1
+  source:
+    repoURL: https://github.com/georgesjamous/RandomNumberk8s.git
+    targetRevision: HEAD
+    path: defs
+
+  # destination:
+  #   server: https://34.73.171.211
+  #   namespace: default
+
+  syncPolicy:
+    automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
+      prune: true # Specifies if resources should be pruned during auto-syncing ( false by default ).
+      selfHeal: true # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
+      allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
+    # The retry feature is available since v1.7
+    retry:
+      limit: 2 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      backoff:
+        duration: 3s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: 2 # a factor to multiply the base duration after each failed retry
+        maxDuration: 1m # the maximum amount of time allowed for the backoff strategy
