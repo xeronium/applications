@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-1
+  name: app-1-project-2
   namespace: argocd
 spec:
   project: project-2
@@ -12,7 +12,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: namespace-project-1
+    namespace: namespace-project-2
 
   syncPolicy:
     automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
