@@ -10,9 +10,9 @@ spec:
     targetRevision: HEAD
     path: defs
 
-  # destination:
-  #   server: https://34.73.171.211
-  #   namespace: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
 
   syncPolicy:
     automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
